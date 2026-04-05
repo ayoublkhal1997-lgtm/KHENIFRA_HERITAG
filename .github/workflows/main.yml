@@ -18,14 +18,10 @@ jobs:
         with:
           flutter-version: '3.19.0'
 
-      - name: Force Clean and Get Deps
-        run: |
-          rm -f pubspec.lock
-          flutter pub get --no-example
-
       - name: Build APK
-        # هاد السطر كيتجاوز مشكل sqflite والنظام القديم بالسيف
-        run: flutter build apk --debug --ignore-deprecation
+        run: |
+          flutter pub get
+          flutter build apk --debug --ignore-deprecation
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

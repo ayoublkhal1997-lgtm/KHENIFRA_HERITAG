@@ -18,12 +18,15 @@ jobs:
         with:
           flutter-version: '3.19.0'
 
-      # هاد السطر غادي يفك الزحام ديال المكتبات ويحدثهم للنسخة اللي كتمشى مع Flutter 3.19
-      - name: Upgrade dependencies
-        run: flutter pub upgrade
+      # هاد الجزء هو اللي غيصلح الصراعات ديال المكتبات اللي فالتصويرة
+      - name: Repair and Upgrade Dependencies
+        run: |
+          flutter pub upgrade --major-versions
+          flutter pub get
 
+      # بناء التطبيق مع تجاهل التنبيهات القديمة
       - name: Build APK
-        run: flutter build apk --debug
+        run: flutter build apk --debug --no-pub
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

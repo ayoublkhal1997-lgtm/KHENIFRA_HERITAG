@@ -18,11 +18,13 @@ jobs:
         with:
           flutter-version: '3.19.0'
 
-      - name: Get dependencies
-        run: flutter pub get
+      - name: Force Clean and Get Deps
+        run: |
+          rm -f pubspec.lock
+          flutter pub get --no-example
 
       - name: Build APK
-        # هاد السطر غيخلي السيرفر يتجاوز المشكل ديال sqflite ويبني الـ APK
+        # هاد السطر كيتجاوز مشكل sqflite والنظام القديم بالسيف
         run: flutter build apk --debug --ignore-deprecation
 
       - name: Upload APK

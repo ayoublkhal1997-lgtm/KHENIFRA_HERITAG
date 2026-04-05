@@ -11,17 +11,17 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '11' # رجعنا لـ 11 للتوافق
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'
+          flutter-version: '3.7.12' # هاد النسخة "جوهرة" حيت كتقبل القديم والجديد
 
-      - name: Build APK
+      - name: Force Build
         run: |
           flutter pub get
-          flutter build apk --debug --ignore-deprecation
+          flutter build apk --debug --no-sound-null-safety --ignore-deprecation
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

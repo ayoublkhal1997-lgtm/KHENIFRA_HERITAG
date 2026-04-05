@@ -22,7 +22,7 @@ jobs:
         run: flutter pub get
 
       - name: Build APK
-        # هاد السطر هو السحر: كيخليه يبني وخا كاين داك التنبيه ديال Android Embedding v1
+        # هاد السطر غيخلي السيرفر يتجاوز المشكل ديال sqflite ويبني الـ APK
         run: flutter build apk --debug --ignore-deprecation
 
       - name: Upload APK

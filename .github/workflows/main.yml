@@ -18,14 +18,15 @@ jobs:
         with:
           flutter-version: '3.19.0'
 
-      # هاد السطر غادي يحل مشكل التوافق اللي بان في الصورة
-      - run: flutter pub get --suppress-analytics
-      
-      # هاد السطر كيبني الـ APK وخا كاينين تنبيهات بسيطة
-      - run: flutter build apk --debug --no-pub
+      # هاد السطر غادي يفك الزحام ديال المكتبات ويحدثهم للنسخة اللي كتمشى مع Flutter 3.19
+      - name: Upgrade dependencies
+        run: flutter pub upgrade
+
+      - name: Build APK
+        run: flutter build apk --debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: khenifra-heritage-apk
-          path: build/app/outputs/flutter-apk/app-debug.apkter-apk/app-debug.apk
+          path: build/app/outputs/flutter-apk/app-debug.apk

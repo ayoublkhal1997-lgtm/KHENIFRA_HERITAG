@@ -6,25 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '11' # رجعنا لـ 11 للتوافق
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.12' # هاد النسخة "جوهرة" حيت كتقبل القديم والجديد
+          flutter-version: '3.19.0' # هادي هي النسخة اللي كيحبها Lenovo ديالك
 
-      - name: Force Build
-        run: |
-          flutter pub get
-          flutter build apk --debug --no-sound-null-safety --ignore-deprecation
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - run: flutter pub get
+      - run: flutter build apk --debug --ignore-deprecation
+      - uses: actions/upload-artifact@v4
         with:
-          name: khenifra-heritage-apk
+          name: app-debug
           path: build/app/outputs/flutter-apk/app-debug.apk

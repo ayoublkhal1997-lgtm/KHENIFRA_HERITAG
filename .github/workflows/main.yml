@@ -11,22 +11,17 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '11'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'
+          flutter-version: '2.10.5'
 
-      # هاد الجزء هو اللي غيصلح الصراعات ديال المكتبات اللي فالتصويرة
-      - name: Repair and Upgrade Dependencies
-        run: |
-          flutter pub upgrade --major-versions
-          flutter pub get
-
-      # بناء التطبيق مع تجاهل التنبيهات القديمة
+      - run: flutter pub get
+      
       - name: Build APK
-        run: flutter build apk --debug --no-pub
+        run: flutter build apk --debug --no-sound-null-safety
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
